@@ -15,7 +15,7 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 /**
  * Service class we use to access administrative controlled settings.
  */
-class SettingsService implements SettingsInterface
+class SettingsService implements SettingsServiceInterface
 {
 
     const SOME_SETTING = ['SETTING_ID' => 30, 'CATEGORY_LEVEL' => 10];
