@@ -2,7 +2,6 @@
 namespace Settings\Service;
 
 // Constructor
-use Iag\Rcm\User\Entity\User;
 use Cache\Service\CacheServiceInterface;
 
 // DB
@@ -19,7 +18,7 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 class SettingsService implements SettingsInterface
 {
 
-    const CASE_GENERATION_STATUS = ['MESSAGE_ID' => 30, 'SEQUENCE' => 10];
+    const SOME_SETTING = ['SETTING_ID' => 30, 'CATEGORY_LEVEL' => 10];
 
 
     /**
@@ -27,11 +26,6 @@ class SettingsService implements SettingsInterface
      * @var AdapterInterface
      */
     protected $dbAdapter;
-    /**
-     *
-     * @var Iag\Rcm\User\Entity\User $user
-     */
-    protected $user;
     /**
      *
      * @var Cache\Service\CacheServiceInterface
@@ -65,11 +59,10 @@ class SettingsService implements SettingsInterface
      * @param User $user
      * @param CacheServiceInterface $cache
      */
-    public function __construct(AdapterInterface $dbAdapter, User $user, $cache)
+    public function __construct(AdapterInterface $dbAdapter, $cache)
     {
         // The essential Database Adapter
         $this->dbAdapter = $dbAdapter;
-        $this->user      = $user;
         $this->cache     = $cache;
 
         // Platform from adapter
@@ -78,8 +71,6 @@ class SettingsService implements SettingsInterface
         $this->connection = $dbAdapter->getDriver()->getConnection();
         // Make the SqlQuery Object.
         $this->sqlObject  = new DbSql($this->dbAdapter);
-
-
     }
 
 
@@ -151,7 +142,6 @@ class SettingsService implements SettingsInterface
                 if ($row === false) {
                     throw new \Exception('Issue with locating that Setting! - Settings->getSpecificSetting');
                 } else {
-                    //@todo save this $setting. TESTING NOOWW
                     $setting = new \Settings\Entity\Setting($row);
                     $this->cache->setCache($this->cacheKey, $row);
                 }

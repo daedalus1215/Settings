@@ -8,7 +8,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Iag\Zend\Db\Adapter\AdapterInterface;
 
-use Settings\Service\Settings;
 
 /**
  * Description of SettingsFactory
@@ -20,11 +19,10 @@ class SettingsServiceFactory implements FactoryInterface
 
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $dbAdapter   = $serviceLocator->get('Iag\Zend\Db\Adapter');
-        $user        = $serviceLocator->get('Iag\Rcm\User\Entity\User');
+        $dbAdapter   = $serviceLocator->get('Zend\Db\Adapter');
         $cache       = $serviceLocator->get('Cache\Service\WincacheService');
 
-        return new Settings($dbAdapter, $user, $cache);
+        return new SettingsService($dbAdapter, $user, $cache);
     }
 
 }
