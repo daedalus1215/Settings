@@ -3,7 +3,8 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'Settings\\Service\\Settings' => 'Settings\\Factory\\SettingsFactory'
+            'Settings\\Service\\Settings' => 'Settings\\Factory\\SettingsFactory',
+            //'Settings\\Entity\\Setting'   => 'Settings\\Factory\\SettingFactory'
         ),
     ),
 );

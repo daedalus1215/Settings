@@ -2,14 +2,13 @@
 namespace Settings\Factory;
 
 
-
 use Zend\ServiceManager\FactoryInterface;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+use Iag\Zend\Db\Adapter\AdapterInterface;
+
+use Settings\Service\Settings;
 
 /**
  * Description of SettingsFactory
@@ -18,8 +17,14 @@ use Zend\ServiceManager\FactoryInterface;
  */
 class SettingsFactory implements FactoryInterface
 {
-    public function createService(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
+
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new \Settings\Service\Settings();
+        $dbAdapter   = $serviceLocator->get('Iag\Zend\Db\Adapter');
+        $user        = $serviceLocator->get('Iag\Rcm\User\Entity\User');
+        $cache       = $serviceLocator->get('Cache\Service\WincacheService');
+
+        return new Settings($dbAdapter, $user, $cache);
     }
+
 }
