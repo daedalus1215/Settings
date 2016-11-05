@@ -15,7 +15,7 @@ use Settings\Service\Settings;
  *
  * @author ladams
  */
-class SettingsFactory implements FactoryInterface
+class SettingsServiceFactory implements FactoryInterface
 {
 
     public function createService(ServiceLocatorInterface $serviceLocator)

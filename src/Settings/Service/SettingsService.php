@@ -16,7 +16,7 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 /**
  * Service class we use to access administrative controlled settings.
  */
-class Settings implements SettingsInterface
+class SettingsService implements SettingsInterface
 {
 
     const CASE_GENERATION_STATUS = ['MESSAGE_ID' => 30, 'SEQUENCE' => 10];
